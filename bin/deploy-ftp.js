@@ -8,7 +8,7 @@ const ftpDeploy   = new FtpDeploy();
 const cwd         = process.cwd();
 const projectJson = require(cwd + '/package.json');
 const deployJson  = require('../package.json');
-const envFilename = '.env.local';
+const envFilename = process.argv[2] || '.env.local';
 
 // load configuration from .env.local file
 require('dotenv').config({path: cwd + '/' + envFilename});
@@ -17,7 +17,7 @@ console.log(chalk.bgMagenta(chalk.black(`- ${deployJson.name} version: ${deployJ
 console.log(chalk.bgYellow(chalk.black(`DEPLOY PROJECT ${projectJson.name}`)));
 
 // check if configuration is defined
-if(!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST){
+if (!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST) {
     console.error(chalk.red(`\nConfiguration not found in ${cwd}/${envFilename}`));
     process.exit(1);
 }
@@ -27,8 +27,8 @@ console.log(chalk.cyan('\nBuilding project...'));
 execSync('npm run build');
 
 // get local dir to upload if not passed from env variables
-let localDir    = process.env.DSDEPLOY_FTP_LOCAL_DIR || null;
-if(localDir === null){
+let localDir = process.env.DSDEPLOY_FTP_LOCAL_DIR || null;
+if (localDir === null) {
     const localDirs = ['dist', 'build'];
     for (let i = 0; i < localDirs.length; i++) {
         if (fs.existsSync(`${cwd}/${localDirs[i]}`)) {
@@ -40,8 +40,7 @@ if(localDir === null){
         console.error(chalk.red('No local dir to upload found, possible values are: ' + localDirs.join(', ')));
         process.exit(1);
     }
-}
-else{
+} else {
     localDir = `${cwd}/${localDir}`;
     if (!fs.existsSync(localDir)) {
         console.error(chalk.red('No local dir to upload found, directory searched: ' + localDir));
@@ -89,6 +88,6 @@ ftpDeploy
 
         // delete build
         deleteBuild();
-    
+
         process.exit(1);
     });
