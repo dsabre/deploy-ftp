@@ -7,11 +7,20 @@ const FtpDeploy   = require("ftp-deploy");
 const ftpDeploy   = new FtpDeploy();
 const cwd         = process.cwd();
 const projectJson = require(cwd + '/package.json');
+const deployJson  = require('../package.json');
+const envFilename = '.env.local';
 
 // load configuration from .env.local file
-require('dotenv').config({path: cwd + '/.env.local'});
+require('dotenv').config({path: cwd + '/' + envFilename});
 
-console.log(chalk.bgYellow(chalk.black(`- DEPLOY PROJECT ${projectJson.name} -`)));
+console.log(chalk.bgMagenta(chalk.black(`- ${deployJson.name} version: ${deployJson.version} -`)));
+console.log(chalk.bgYellow(chalk.black(`DEPLOY PROJECT ${projectJson.name}`)));
+
+// check if configuration is defined
+if(!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST){
+    console.error(chalk.red(`Configuration not found in ${cwd}/${envFilename}`));
+    process.exit(1);
+}
 
 // build project
 console.log(chalk.cyan('\nBuilding project...'));
@@ -71,4 +80,6 @@ ftpDeploy
 
         // delete build
         deleteBuild();
+    
+        process.exit(1);
     });
