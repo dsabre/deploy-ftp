@@ -18,7 +18,7 @@ console.log(chalk.bgYellow(chalk.black(`DEPLOY PROJECT ${projectJson.name}`)));
 
 // check if configuration is defined
 if(!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST){
-    console.error(chalk.red(`Configuration not found in ${cwd}/${envFilename}`));
+    console.error(chalk.red(`\nConfiguration not found in ${cwd}/${envFilename}`));
     process.exit(1);
 }
 
@@ -26,18 +26,27 @@ if(!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST){
 console.log(chalk.cyan('\nBuilding project...'));
 execSync('npm run build');
 
-// get local dir to upload
-let localDir    = null;
-const localDirs = ['dist', 'build'];
-for (let i = 0; i < localDirs.length; i++) {
-    if (fs.existsSync(`${cwd}/${localDirs[i]}`)) {
-        localDir = `${cwd}/${localDirs[i]}`;
-        break;
+// get local dir to upload if not passed from env variables
+let localDir    = process.env.DSDEPLOY_FTP_LOCAL_DIR || null;
+if(localDir === null){
+    const localDirs = ['dist', 'build'];
+    for (let i = 0; i < localDirs.length; i++) {
+        if (fs.existsSync(`${cwd}/${localDirs[i]}`)) {
+            localDir = `${cwd}/${localDirs[i]}`;
+            break;
+        }
+    }
+    if (!localDir) {
+        console.error(chalk.red('No local dir to upload found, possible values are: ' + localDirs.join(', ')));
+        process.exit(1);
     }
 }
-if (!localDir) {
-    console.error(chalk.red('No local dir to upload found, possible values are: ' + localDirs.join(', ')));
-    process.exit(1);
+else if(){
+    localDir = `${cwd}/${localDir}`;
+    if (!fs.existsSync(localDir)) {
+        console.error(chalk.red('No local dir to upload found, directory searched: ' + localDir));
+        process.exit(1);
+    }
 }
 
 const deleteBuild = () => {
