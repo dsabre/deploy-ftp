@@ -12,13 +12,6 @@ require('dotenv').config({path: cwd + '/.env.local'});
 
 console.log(chalk.bgYellow(chalk.black(`- DEPLOY PROJECT ${projectJson.name} -`)));
 
-// set mail constants
-const FTP_USER       = process.env.DSDEPLOY_FTP_USER;
-const FTP_HOST       = process.env.DSDEPLOY_FTP_HOST;
-const FTP_PORT       = process.env.DSDEPLOY_FTP_PORT || 21;
-const FTP_PASSWORD   = process.env.DSDEPLOY_FTP_PASSWORD;
-const FTP_REMOTE_DIR = process.env.DSDEPLOY_FTP_REMOTE_DIR || cwd.split('/').reverse()[0];
-
 // build project
 console.log(chalk.cyan('\nBuilding project...'));
 execSync('npm run build');
@@ -44,20 +37,20 @@ const deleteBuild = () => {
 
 // ftp configuration
 const config = {
-    user:         FTP_USER,
-    host:         FTP_HOST,
-    port:         FTP_PORT,
+    user:         process.env.DSDEPLOY_FTP_USER,
+    host:         process.env.DSDEPLOY_FTP_HOST,
+    port:         process.env.DSDEPLOY_FTP_PORT || 21,
     localRoot:    localDir,
-    remoteRoot:   `/${FTP_REMOTE_DIR}/`,
+    remoteRoot:   '/' + (process.env.DSDEPLOY_FTP_REMOTE_DIR || cwd.split('/').reverse()[0]) + '/',
     include:      ["*", "**/*"], // this would upload everything except dot files
-    deleteRemote: false, // delete ALL existing files at destination before uploading, if true
-    forcePasv:    true, // Passive mode is forced (EPSV command is not sent)
-    sftp:         false // use sftp or ftp
+    deleteRemote: parseInt(process.env.DSDEPLOY_FTP_DELETE_REMOTE) === 1, // delete ALL existing files at destination before uploading, if true
+    forcePasv:    typeof process.env.DSDEPLOY_FTP_FORCE_PASSIVE_MODE !== 'undefined' ? parseInt(process.env.DSDEPLOY_FTP_FORCE_PASSIVE_MODE) === 1 : true, // Passive mode is forced (EPSV command is not sent)
+    sftp:         parseInt(process.env.DSDEPLOY_FTP_USE_SFTP) === 1 // use sftp or ftp
 };
 
 // Password optional, prompted if none given
-if (FTP_PASSWORD) {
-    config.password = FTP_PASSWORD;
+if (process.env.DSDEPLOY_FTP_PASSWORD) {
+    config.password = process.env.DSDEPLOY_FTP_PASSWORD;
 }
 
 console.log(chalk.cyan('\nFTP deploy configuration:'));
