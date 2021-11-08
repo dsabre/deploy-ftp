@@ -4,7 +4,7 @@
 Build and deploy a nodejs application (such as React, Angular, Vue ecc...).
 
 
-## Usage/Examples
+## Configuration
 
 Create a **.env.local** file in your project directory with following variables:
 
@@ -19,6 +19,9 @@ Create a **.env.local** file in your project directory with following variables:
 | `DSDEPLOY_FTP_DELETE_REMOTE`      | `integer`  | Set to `0` or `1` to delete remote files before upload (default `0`)                                 |
 | `DSDEPLOY_FTP_FORCE_PASSIVE_MODE` | `integer`  | Set to `0` or `1` to use passive mode (default `1`)                                                  |
 | `DSDEPLOY_FTP_USE_SFTP`           | `integer`  | Set to `0` or `1` to use SFTP (default `0`)                                                          |
+
+
+## Usage
 
 Use this command to deploy to your FTP server:
 
