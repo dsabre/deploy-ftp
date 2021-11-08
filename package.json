@@ -10,9 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/dsabre/deploy-ftp.git"
   },
-  "keywords": [],
+  "keywords": ["deploy", "ftp"],
   "author": "Daniele Sabre (https://github.com/dsabre)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dsabre/deploy-ftp/issues"
   },
