@@ -1,15 +1,13 @@
 #!/usr/bin/env node
-console.log(process.cwd());
-process.exit();
 const fs          = require("fs");
 const chalk       = require("chalk");
 const {execSync}  = require("child_process");
 const FtpDeploy   = require("ftp-deploy");
 const ftpDeploy   = new FtpDeploy();
-const projectJson = require('./package.json');
+const projectJson = require(process.cwd() + '/package.json');
 
 // load configuration from .env.local file
-require('dotenv').config({path: '.env.local'});
+require('dotenv').config({path: process.cwd() + '/.env.local'});
 
 console.log(chalk.bgYellow(chalk.black(`- DEPLOY PROJECT ${projectJson.name} -`)));
 
