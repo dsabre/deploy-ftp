@@ -41,7 +41,7 @@ const config = {
     host:         process.env.DSDEPLOY_FTP_HOST,
     port:         process.env.DSDEPLOY_FTP_PORT || 21,
     localRoot:    localDir,
-    remoteRoot:   '/' + (process.env.DSDEPLOY_FTP_REMOTE_DIR || cwd.split('/').reverse()[0]) + '/',
+    remoteRoot:   process.env.DSDEPLOY_FTP_REMOTE_DIR || ('/' + cwd.split('/').reverse()[0]) + '/'),
     include:      ["*", "**/*"], // this would upload everything except dot files
     deleteRemote: parseInt(process.env.DSDEPLOY_FTP_DELETE_REMOTE) === 1, // delete ALL existing files at destination before uploading, if true
     forcePasv:    typeof process.env.DSDEPLOY_FTP_FORCE_PASSIVE_MODE !== 'undefined' ? parseInt(process.env.DSDEPLOY_FTP_FORCE_PASSIVE_MODE) === 1 : true, // Passive mode is forced (EPSV command is not sent)
