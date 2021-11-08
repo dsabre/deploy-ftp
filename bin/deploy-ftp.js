@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+console.log(__dirname);
+process.exit();
 const fs          = require("fs");
 const chalk       = require("chalk");
 const {execSync}  = require("child_process");
