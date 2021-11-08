@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require("./utils/strings");
 const fs          = require("fs");
 const chalk       = require("chalk");
 const {execSync}  = require("child_process");
