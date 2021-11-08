@@ -41,7 +41,7 @@ if(localDir === null){
         process.exit(1);
     }
 }
-else if(){
+else{
     localDir = `${cwd}/${localDir}`;
     if (!fs.existsSync(localDir)) {
         console.error(chalk.red('No local dir to upload found, directory searched: ' + localDir));
