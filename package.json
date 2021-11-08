@@ -1,6 +1,6 @@
 {
   "name": "@dsabre/deploy-ftp",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha",
   "description": "Build and deploy a builded nodejs application (such as React, Angular, Vue ecc...).",
   "main": "index.js",
   "bin": {
