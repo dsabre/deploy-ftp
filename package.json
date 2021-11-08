@@ -10,11 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/dsabre/deploy-ftp.git"
   },
-  "keywords": ["deploy", "ftp"],
+  "keywords": [
+    "deploy",
+    "ftp"
+  ],
   "author": "Daniele Sabre (https://github.com/dsabre)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dsabre/deploy-ftp/issues"
   },
-  "homepage": "https://github.com/dsabre/deploy-ftp#readme"
+  "homepage": "https://github.com/dsabre/deploy-ftp#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "ftp-deploy": "^2.3.8"
+  }
 }
