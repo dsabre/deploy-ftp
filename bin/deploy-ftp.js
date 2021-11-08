@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-console.log(__dirname);
+console.log(process.cwd());
 process.exit();
 const fs          = require("fs");
 const chalk       = require("chalk");
