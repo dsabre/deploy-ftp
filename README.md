@@ -1,5 +1,10 @@
-
 # Nodejs FTP deploy
+
+[![Version](https://img.shields.io/npm/v/@dsabre/deploy-ftp?style=for-the-badge)](https://www.npmjs.com/package/@dsabre/deploy-ftp)
+[![License: MIT](https://img.shields.io/npm/l/@dsabre/deploy-ftp?registry_uri=https%3A%2F%2Fregistry.npmjs.org&style=for-the-badge)](https://github.com/dsabre/deploy-ftp/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/npm/dw/@dsabre/deploy-ftp?style=for-the-badge)](https://www.npmjs.com/package/@dsabre/deploy-ftp)
+[![GitHub issues](https://img.shields.io/github/issues-raw/dsabre/deploy-ftp?style=for-the-badge)](https://github.com/dsabre/deploy-ftp/issues)
+[![Dependencies](https://img.shields.io/librariesio/release/npm/@dsabre/deploy-ftp?style=for-the-badge)](https://www.npmjs.com/package/@dsabre/deploy-ftp)
 
 Build and deploy a nodejs application (such as React, Angular, Vue ecc...).
 
@@ -40,6 +45,11 @@ or with any name you want:
 ```bash
 npx @dsabre/deploy-ftp myEnvFile.txt
 ```
+
+
+## Contributing
+
+For contributions, issues and feature requests please check [issues page](https://github.com/dsabre/deploy-ftp/issues).
 
 
 ## Authors
