@@ -6,7 +6,6 @@ const {execSync}  = require("child_process");
 const FtpDeploy   = require("ftp-deploy");
 const ftpDeploy   = new FtpDeploy();
 const cwd         = process.cwd();
-const projectJson = require(cwd + '/package.json');
 const deployJson  = require('../package.json');
 const envFilename = process.argv[2] || '.env.local';
 
@@ -14,7 +13,13 @@ const envFilename = process.argv[2] || '.env.local';
 require('dotenv').config({path: cwd + '/' + envFilename});
 
 console.log(chalk.bgMagenta(chalk.black(`- ${deployJson.name} version: ${deployJson.version} -`)));
-console.log(chalk.bgYellow(chalk.black(`DEPLOY PROJECT ${projectJson.name}`)));
+
+// if the project is a nodejs project, show a subtitle
+try {
+    const projectJson = require(cwd + '/package.json');
+    console.log(chalk.bgYellow(chalk.black(`DEPLOY PROJECT ${projectJson.name}`)));
+} catch (err) {
+}
 
 // check if configuration is defined
 if (!process.env.DSDEPLOY_FTP_USER || !process.env.DSDEPLOY_FTP_HOST) {
