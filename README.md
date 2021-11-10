@@ -8,6 +8,8 @@
 
 Build and deploy a nodejs application (such as React, Angular, Vue ecc...).
 
+From version 1.1.0, using `DSDEPLOY_FTP_PREDEPLOY` variable, you can deploy anything, even not a site.
+
 
 ## Configuration
 
